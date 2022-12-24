@@ -64,4 +64,9 @@ Or, if you wish to manage VSCode through home-manager (my setup), add this to yo
 }
 ```
 
-2.
+2. Necessary Packages to install on your system.
+  - Add these to either `environment.systemPackages` or `home.nix`:
+    ```
+       ltex-ls
+       nil
+    ```
