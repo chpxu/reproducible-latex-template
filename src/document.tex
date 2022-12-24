@@ -1,5 +1,41 @@
-\documentclass[a4paper]{article}
+\documentclass{book}
+\pdfvariable suppressoptionalinfo 512\relax
+\usepackage[utf8]{inputenc}
+\pagestyle{headings}
+%===Other Packages
+\usepackage{bookmark, tikz, amsmath, amssymb, amsthm, braket, esint, hyperref, siunitx, mathtools, pgfplots, graphicx, float, biblatex, subfiles, tabularx}
+\usepackage[compat=1.1.0]{tikz-feynman}
+\usepackage[margin=1.0in]{geometry}
+\pgfplotsset{compat=1.18}
 
+% amsthm stuff
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{definition}
+\newtheorem{axiom}{Axiom}[section]
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+
+\theoremstyle{plain}
+\newtheorem{corollary}{Corollary}[section]
+
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}[section]
+
+\newcommand{\bvector}[1]{\mathbf{#1}}
+\title{Welcome to the Reproducible LaTeX Environment!}
+\author{chpxu}
 \begin{document}
-Hello, World!
+\maketitle
+\tableofcontents
+
+\subfile{./1_chapter1/chapter1}
 \end{document}
