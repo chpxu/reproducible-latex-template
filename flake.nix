@@ -13,7 +13,7 @@
       eachSystem allSystems (system: let
         pkgs = nixpkgs.legacyPackages.${system};
         tex = pkgs.texlive.combine {
-          inherit (pkgs.texlive) scheme-basic latex-bin latexmk bookmark tikz latex-amsmath-dev amslatex-primer braket esint hyperref siunitx mathtools pgfplots latex-graphics-dev float biblatex subfiles latex-tools-dev;
+          inherit (pkgs.texlive) scheme-basic latex-bin latexmk biber bookmark tikz-feynman latex-amsmath-dev amslatex-primer braket esint hyperref siunitx mathtools pgfplots latex-graphics-dev float biblatex subfiles latex-tools-dev;
         };
       in rec {
         packages = {
