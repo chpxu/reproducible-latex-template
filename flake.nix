@@ -28,7 +28,7 @@
                          env TEXMFHOME=.cache TEXMFVAR=.cache/texmf-var \
               SOURCE_DATE_EPOCH=${toString self.lastModified} \
               latexmk -interaction=nonstopmode -pdf -lualatex \
-              document.tex
+              ./src/document.tex
             '';
             installPhase = ''
               mkdir -p $out

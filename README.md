@@ -21,7 +21,7 @@ First, give it executable permissions (this file should only ever need to operat
 
 ```sh
 ./rlt.sh new subfile <name>
-./rlt.sh rm <name|name.tex>
+./rlt.sh rm <name>
 ./rlt.sh build
 ```
 
