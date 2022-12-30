@@ -2,7 +2,7 @@
 
 Full Credits to [flyx's guide](https://flyx.org/nix-flakes-latex/)!
 
-Having been obsessed with NixOS and its developer enjoyments, namely reproducibility. This repository aims to create an opinionated, standardised environment for (my) creating LaTeX documents in Maths and Physics (or any science really), as well as providing a helper shell script to automate actions commonly taken. This repository assumes:
+Having been obsessed with NixOS and its developer enjoyments, namely reproducibility. This repository aims to create an opinionated, standardised environment for (my) creating LaTeX documents in Maths and Physics (or any science really), as well as providing a helper shell script to automate actions (mostly subfile related) commonly taken. This repository assumes:
 
 - Basic understanding of Nix
   - `stdenv.mkDerivation`, phases if you want to do elaborate modification of `flake.nix` etc.
@@ -27,10 +27,29 @@ First, give it executable permissions (this file should only ever need to operat
 
 1. `new` is a command to generate a new TeX file according to the skeleton files in `./skel`. It accepts the following arguments:
    - `subfile <name>` will produce a new folder in `./src` with the name `(current number of folders + 1)-<name>` with the file structure of `./skel/subfile`.
-     - The script automatically renames the `subfile.tex` to `<name>.tex`
-     - The script also automatically appends a `\subfile{{/path/to/subfile}}` in the main `./src/document.tex`
-2. `rm` is a command to remove a file from `src`
-   - TBD
+     - The script automatically renames the `subfile.tex` to `<name>.tex`.
+     - The script also automatically appends a `\subfile{{/path/to/subfile}}` in the main `./src/document.tex`.
+     - The script checks the `<name>` is alphanumeric.
+2. `rm` is a command to remove a subfile from `src`
+   - `rm <name>` will delete the folder named `<name>` by first matching it to a regex (WIP) before **permanently deleting it.**
+     - It will also remove the appropriate subfile command from `document.tex` (WIP)
+3. `build` will attempt to compile the document
+   - Note: if you have nix installed, run `nix develop` and then `nix build` in the root directory of repo to get an output
+   - Does a dirty check to see if nix is installed to run the flake, otherwise runs `latexmk` directly.
+
+## Roadmap
+
+Since this is a template, the actual LaTeX/flake should never really need to change. Issues may arise if you are not using nix, in which case you will probably have a different/changing TeXLive version (or maybe a different TeX distribution altogether!) in which case reproducibility may not be guaranteed. It should, however, be idempotent for the same version of TeX you are using to compile the project with.
+
+- Ensure the flake is updated with common Maths/Physics packages
+- Explore a less destructive `/src` directory. Perhaps a `edit/` folder of some sorts?
+- Update repo with brief examples of the packages used
+
+### `rlt`
+
+- Maybe this should become a separate utility?
+- [ ] Add more checks for `rm` to reduce unsafe deletes
+- [ ] Explore management of some document/compiler options through the shell script
 
 # (Personal) Development Environment Installation and Configuration
 
