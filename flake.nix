@@ -13,7 +13,7 @@
       eachSystem allSystems (system: let
         pkgs = nixpkgs.legacyPackages.${system};
         tex = pkgs.texlive.combine {
-          inherit (pkgs.texlive) scheme-basic latex-bin latexmk biber bookmark tikz-feynman latex-amsmath-dev amslatex-primer braket esint hyperref siunitx mathtools pgfplots latex-graphics-dev float biblatex subfiles latex-tools-dev;
+          inherit (pkgs.texlive) scheme-basic latex-bin latexmk hyperref biber bookmark tikz-feynman latex-amsmath-dev amslatex-primer latex-tools-dev latex-graphics-dev subfiles braket esint siunitx mathtools pgfplots float biblatex polynom;
         };
       in rec {
         packages = {
@@ -23,12 +23,11 @@
             buildInputs = [pkgs.coreutils tex];
             phases = ["unpackPhase" "buildPhase" "installPhase"];
             buildPhase = ''
-                         export PATH="${pkgs.lib.makeBinPath buildInputs}";
-                         mkdir -p .cache/texmf-var
-                         env TEXMFHOME=.cache TEXMFVAR=.cache/texmf-var \
-              SOURCE_DATE_EPOCH=${toString self.lastModified} \
-              latexmk -interaction=nonstopmode -pdf -lualatex \
-              ./src/document.tex
+              export PATH="${pkgs.lib.makeBinPath buildInputs}";
+              mkdir -p .cache/texmf-var
+              env TEXMFHOME=.cache TEXMFVAR=.cache/texmf-var \
+                SOURCE_DATE_EPOCH=${toString self.lastModified} \
+                latexmk -interaction=nonstopmode -pdf -lualatex "document.tex"
             '';
             installPhase = ''
               mkdir -p $out
